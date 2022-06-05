@@ -1,2 +1,2 @@
-from .Models.Menu import *
+from .Models import *
 from .data.menu import simulations

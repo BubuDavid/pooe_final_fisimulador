@@ -25,6 +25,9 @@ class Coord:
 		return self - other_coord
 
 	def __mul__(self, other_coord):
+		if isinstance(other_coord, float) or isinstance(other_coord, int):
+			return Coord(other_coord * self.x, other_coord * self.y)
+
 		result_x = self.x * other_coord.x
 		result_y = self.y * other_coord.y
 
