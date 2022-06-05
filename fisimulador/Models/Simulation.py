@@ -59,12 +59,12 @@ class Simulation:
 		self.back_button = ttk.Button(
 			self.simulation_frame,
 			text = "Regresar",
-			command = self.close_window
 		)
 		# Run Simulation
+		self.run_text = StringVar(value = "¡Reproducir!")
 		self.run_simulation = ttk.Button(
 			self.simulation_frame,
-			text = "¡Empezar!"
+			textvariable = self.run_text
 		)
 
 		# ========== Canvas ========== #
@@ -121,13 +121,25 @@ class Simulation:
 	
 	def build_scenario(self):
 		if self.simulation_name == "collisions_pi":
-			Collisions(self.canvas, self.run_simulation)
+			scenario = Collisions(self.canvas, self.window)
 		if self.simulation_name == "free_fall":
-			FreeFall(self.canvas, self.run_simulation)
+			scenario = FreeFall(self.canvas, self.window)
 		if self.simulation_name == "simple_gas":
-			SimpleGas(self.canvas, self.run_simulation)
+			scenario = SimpleGas(self.canvas, self.window)
 		if self.simulation_name == "launch":
-			Launch(self.canvas, self.run_simulation)
+			scenario = Launch(self.canvas, self.window)
 
-	def close_window(self):
-		self.window.destroy()
+		def pause_wrapper():
+			self.run_text.set("Reproducir")
+			self.run_simulation['command'] = run_wrapper
+			scenario.pause()
+
+		def run_wrapper():
+			self.run_text.set("Pausar")
+			self.run_simulation['command'] = pause_wrapper
+			scenario.run()
+
+
+		self.run_simulation['command'] = run_wrapper
+		self.back_button['command'] = scenario.close
+		self.window.protocol("WM_DELETE_WINDOW", scenario.close)

@@ -11,7 +11,7 @@ class Solid:
 		return [(coord.x, coord.y) for coord in self.coords]
 
 	def show(self, canvas):
-		canvas.create_polygon(
+		self.canvas_object = canvas.create_polygon(
 			self.unpack_coords(),
 			fill = self.color
 		)
@@ -20,7 +20,7 @@ class Solid:
 	
 	def update(self):
 		for index in range(len(self.coords)):
-			self.coords[index] + self.velocity
+			self.coords[index] += self.velocity
 
 		return self
 

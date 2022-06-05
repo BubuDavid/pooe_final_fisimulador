@@ -65,3 +65,6 @@ class Coord:
 		if self.norm() != other_coord.norm():
 			return True
 		return False
+
+	def __repr__(self):
+		return f"[{self.x}, {self.y}]"

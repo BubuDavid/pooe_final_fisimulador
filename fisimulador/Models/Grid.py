@@ -5,8 +5,8 @@ class Grid(Canvas):
 	def __init__(self, window, parent, **options):
 		super().__init__(parent, options)
 		window.update_idletasks()
-		self.width = window.winfo_width()
-		self.height = window.winfo_height()
+		self.width = 2000
+		self.height = 2000
 		self.create_grid()
 
 	def create_grid(self):
