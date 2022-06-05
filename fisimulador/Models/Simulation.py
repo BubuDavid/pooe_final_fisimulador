@@ -121,13 +121,13 @@ class Simulation:
 	
 	def build_scenario(self):
 		if self.simulation_name == "collisions_pi":
-			Collisions(self.canvas)
+			Collisions(self.canvas, self.run_simulation)
 		if self.simulation_name == "free_fall":
-			FreeFall(self.canvas)
+			FreeFall(self.canvas, self.run_simulation)
 		if self.simulation_name == "simple_gas":
-			SimpleGas(self.canvas)
+			SimpleGas(self.canvas, self.run_simulation)
 		if self.simulation_name == "launch":
-			Launch(self.canvas)
+			Launch(self.canvas, self.run_simulation)
 
 	def close_window(self):
 		self.window.destroy()

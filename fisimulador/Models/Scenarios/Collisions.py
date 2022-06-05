@@ -1,7 +1,8 @@
 from .Components import *
 
 class Collisions:
-	def __init__(self, canvas):
+	def __init__(self, canvas, run):
+		run['command'] = lambda **args: print(args)
 		self.display_background(canvas)
 		self.display_blocks(canvas)
 
