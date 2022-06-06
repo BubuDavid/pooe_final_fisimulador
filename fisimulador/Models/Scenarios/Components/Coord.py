@@ -71,3 +71,6 @@ class Coord:
 
 	def __repr__(self):
 		return f"[{self.x}, {self.y}]"
+
+	def __abs__(self):
+		return Coord(abs(self.x), abs(self.y))

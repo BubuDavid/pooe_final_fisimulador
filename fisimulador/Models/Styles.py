@@ -27,6 +27,11 @@ class Styles:
 			'Title.TLabel',
 			font = "Helvetica 20"
 		)
+		self.styles.configure(
+			'CanvasLabel.TLabel',
+			font = "Helvetica 20",
+			background = "#F0D9FF"
+		)
 
 	def canvas():
 		pass

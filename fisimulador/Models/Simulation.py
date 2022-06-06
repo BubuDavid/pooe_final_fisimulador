@@ -9,6 +9,7 @@ from .Scenarios import *
 class Simulation:
 	def __init__(self, simulation_names):
 		self.simulation_name = simulation_names['name']
+		self.display_simulation = False
 		self.simulation_display_name = simulation_names['display_name']
 		self.config()
 		self.create_simulation()
@@ -22,8 +23,8 @@ class Simulation:
 			"posx": 400,
 			"posy": 100,
 		}
-
-		self.window.geometry(f'{window_props["width"]}x{window_props["height"]}+{window_props["posx"]}+{window_props["posy"]}')
+		self.window.attributes('-zoomed', True)
+		# self.window.geometry(f'{window_props["width"]}x{window_props["height"]}+{window_props["posx"]}+{window_props["posy"]}')
 
 	def create_simulation(self):
 		self.create_components()
@@ -61,10 +62,17 @@ class Simulation:
 			text = "Regresar",
 		)
 		# Run Simulation
-		self.run_text = StringVar(value = "¡Reproducir!")
+		self.run_text = StringVar(value = "Reproducir")
 		self.run_simulation = ttk.Button(
 			self.simulation_frame,
 			textvariable = self.run_text
+		)
+
+		# ========== Parameters ========== #
+		self.param_frame = ttk.Frame(
+			self.window,
+			borderwidth = 1, 
+			relief = 'raised'
 		)
 
 		# ========== Canvas ========== #
@@ -90,28 +98,37 @@ class Simulation:
 			columnspan = 3,
 			padx = 50,
 		)
-		## Buttons
-		### Back Button
-		self.back_button.grid(
-			column = 0,
-			row = 0,
-			padx = padding,
-			sticky = (W)
-		)
-		### Run Button
-		self.run_simulation.grid(
-			column = 2,
-			row = 0,
-			padx = padding,
-			sticky = (E)
-		)
+		
+		if True:
+			## Buttons
+			### Back Button
+			self.back_button.grid(
+				column = 0,
+				row = 0,
+				padx = padding,
+				sticky = (W)
+			)
+			### Run Button
+			self.run_simulation.grid(
+				column = 2,
+				row = 0,
+				padx = padding,
+				sticky = (E)
+			)
 
-		self.canvas.grid(
-			column = 0,
-			row = 2,
-			columnspan = 3,
-			sticky = (N, S, E, W),
-		)
+			self.canvas.grid(
+				column = 0,
+				row = 2,
+				columnspan = 3,
+				sticky = (N, S, E, W),
+			)
+		else:
+			self.simulation_frame.grid(
+				column = 0,
+				row = 1,
+				columnspan = 3,
+				sticky = (N, S, E, W)
+			)
 
 		# Resizing
 		self.simulation_frame.columnconfigure((0,1,2), weight = 1)

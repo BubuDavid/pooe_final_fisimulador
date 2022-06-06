@@ -1,7 +1,7 @@
 from fisimulador import *
 
 def main():
-	Menu(simulations)
+	MenuWindow(simulations)
 
 if __name__ == "__main__":
 	main()

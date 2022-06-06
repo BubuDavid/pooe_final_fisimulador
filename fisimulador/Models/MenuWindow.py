@@ -1,13 +1,12 @@
 from tkinter import *
 from tkinter import ttk
-from turtle import bgcolor
 from PIL import Image, ImageTk
 
 from .Simulation import Simulation
 from .Styles import Styles
 
 
-class Menu:
+class MenuWindow:
 	def __init__(self, simulations):
 		self.config()
 		self.simulations = simulations
@@ -22,8 +21,9 @@ class Menu:
 			"posx": 400,
 			"posy": 100,
 		}
-		self.root.geometry(f'{window["width"]}x{window["height"]}+{window["posx"]}+{window["posy"]}')
-		# root.geometry(f'+{window["posx"]}+{window["posy"]}')
+		self.root.attributes('-zoomed', True)
+		self.logo_img = PhotoImage(file='fisimulador/assets/images/logo.png')
+		self.root.tk.call('wm', 'iconphoto', self.root._w, self.logo_img)
 
 	def create_menu(self):
 		self.create_components()
