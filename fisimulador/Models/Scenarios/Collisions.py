@@ -53,6 +53,23 @@ class Collisions(Scenario):
 			color = '#7C3E66',
 			m = self.block1.m * 100 ** (self.digits - 1)
 		)
+		if self.digits >= 4:
+			new_velocity = -1/(10**(self.digits - 3))
+			self.block2.velocity[0] = new_velocity
+			coords1 = [
+				np.array([50, 600], dtype = np.float64), 
+				np.array([150, 600], dtype = np.float64), 
+				np.array([150, 697], dtype = np.float64),
+				np.array([50, 697], dtype = np.float64),
+			]
+			coords2 = [
+				np.array([155, 300], dtype = np.float64), 
+				np.array([555, 300], dtype = np.float64), 
+				np.array([555, 697], dtype = np.float64),
+				np.array([155, 697], dtype = np.float64),
+			]
+			self.block1.coords = coords1
+			self.block2.coords = coords2
 
 		self.block1.show(self.canvas)
 		self.block2.show(self.canvas)

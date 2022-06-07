@@ -3,7 +3,7 @@ simulations = [
 		"name": "collisions_pi",
 		"display_name": "Calculando PI con\ncolisiones elásticas",
 		"params": [
-			{'name': 'Número de dígitos', 'limits': [1, 3], 'default': '1'},
+			{'name': 'Número de dígitos', 'limits': [1, 6], 'default': '1'},
 		],
 		"image": "collisions_pi.jpg"
 	},
