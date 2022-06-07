@@ -14,7 +14,7 @@ simulations = [
 			{"name": "Puedes colocar objetos \n donde quieras"},
 			{"name": "Gravedad", 'dLimits': [1, 100], 'default': '9.8'},
 		],
-		"image": "freefall.png"
+		"image": "freefall.jpg"
 	},
 	{
 		"name": "n-body",
@@ -23,7 +23,7 @@ simulations = [
 			{'name': 'Número de cuerpos', 'limits': [2, 100], 'default': '2'},
 			{'name': 'Intensidad de Gravedad', 'limits': [0.001, 100], 'default':"1.0"}
 		],
-		"image": "n-body.png"
+		"image": "n-body.jpg"
 		
 	},
 	

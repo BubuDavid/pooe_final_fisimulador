@@ -12,6 +12,7 @@ class MenuFrame(MyFrame):
 		self.parent = parent
 		self.simulations = simulations
 		self.initial_configuration((0, 1, 2), (0,1,2))
+		self['style'] = 'Menu.TFrame'
 		self.display()
 
 	def display(self):
@@ -27,7 +28,7 @@ class MenuFrame(MyFrame):
 			text = "FISIMULACIONES",
 			image = self.logo,
 			compound = "left",
-			style = 'Title.TLabel'
+			style = 'Menu.Title.TLabel'
 		)
 
 		# Simulatino Frames
@@ -46,7 +47,7 @@ class MenuFrame(MyFrame):
 				).get_image()
 
 			# Create the frame
-			temp_frame = ttk.Frame(self, cursor = 'center_ptr')
+			temp_frame = ttk.Frame(self, cursor = 'center_ptr', style = 'Menu.TFrame')
 			# Create labels inside frames
 			temp_label_image = ttk.Label(
 				temp_frame,
@@ -54,6 +55,7 @@ class MenuFrame(MyFrame):
 				text = simulation['display_name'],
 				compound = 'top',
 				justify = 'center',
+				style = 'Menu.TLabel'
 			)
 			temp_label_image.image = temp_image
 			temp_label_image.pack(pady = 30)
@@ -89,10 +91,12 @@ class MenuFrame(MyFrame):
 
 	def add_interaction(self, frame):
 		def enter(frame):
+			frame['style'] = 'Focus.TFrame'
 			frame['relief'] = 'raised'
 			frame['borderwidth'] = 1
 
 		def leave(frame):
+			frame['style'] = 'Menu.TFrame'
 			frame['relief'] = 'flat'
 			frame['borderwidth'] = 0
 
