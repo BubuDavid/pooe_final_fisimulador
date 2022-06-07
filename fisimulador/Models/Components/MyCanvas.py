@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk
 
-from ..Scenarios.NBody import NBody
+from fisimulador.Models.Scenarios.FreeFall import FreeFall
+
+from ..Scenarios import *
 
 class MyCanvas(Canvas):
 	def __init__(
@@ -46,6 +48,11 @@ class MyCanvas(Canvas):
 		self.choose_simulation()
 		self.create_param_frame(self.simulation.get('params', []))
 		self.scenario.set_params(self.simulation, self.entries)
+		try:
+			if self.scenario.start_after:
+				self.scenario.run()
+		except:
+			pass
 		
 
 	def choose_simulation(self):
@@ -54,6 +61,10 @@ class MyCanvas(Canvas):
 		name = self.simulation['name']
 		if name == 'n-body':
 			self.scenario = NBody(self)
+		if name == 'collisions_pi':
+			self.scenario = Collisions(self, self.parent)
+		if name == 'free_fall':
+			self.scenario = FreeFall(self.parent, self)
 
 	def create_param_frame(self, params):
 		self.param_frame = ttk.Frame(
@@ -72,11 +83,21 @@ class MyCanvas(Canvas):
 				self.param_frame,
 				text = param['name'] + f" {param.get('limits', '')}",
 				style = 'Param.TLabel',
-				padding = 10
+				padding = 10,
+				justify = 'center'
 			).pack()
 
 			limits = param.get('limits', False)
+			dLimits = param.get('dLimits', False)
 			options = param.get('options', False)
+			if dLimits:
+				self.entries[param['name']] = StringVar(value = param['default'])
+				temp_entry = ttk.Entry(
+					self.param_frame,
+					textvariable = self.entries[param['name']],
+					style = 'Param.TEntry',
+				)
+				temp_entry.pack()
 			if limits:
 				self.entries[param['name']] = StringVar(value = param['default'])
 				temp_entry = ttk.Entry(
@@ -96,22 +117,29 @@ class MyCanvas(Canvas):
 				)
 				temp_option.pack()
 
-		buttom_frame = ttk.Frame(
-			self.param_frame
-		)
-		buttom_frame.pack(side = 'bottom', pady = 16)
-		self.run_text = StringVar(value = 'Correr')
-		self.run_button = ttk.Button(
-			buttom_frame,
-			textvariable = self.run_text,
-			command = self.wrapper_run
-		)
-		self.run_button.pack(side = 'left', padx = 16)
-		ttk.Button(
-			buttom_frame,
-			text = "Reiniciar",
-			command = lambda: self.scenario.set_params(self.simulation, self.entries)
-		).pack(side = 'right', padx = 16)
+		if self.scenario.have_buttons:
+			buttom_frame = ttk.Frame(
+				self.param_frame
+			)
+			buttom_frame.pack(side = 'bottom', pady = 16)
+			self.run_text = StringVar(value = 'Correr')
+			self.run_button = ttk.Button(
+				buttom_frame,
+				textvariable = self.run_text,
+				command = self.wrapper_run
+			)
+			self.run_button.pack(side = 'left', padx = 16)
+			ttk.Button(
+				buttom_frame,
+				text = "Reiniciar",
+				command = lambda: self.scenario.set_params(self.simulation, self.entries)
+			).pack(side = 'right', padx = 16)
+		else:
+			ttk.Button(
+				self.param_frame,
+				text = "Actualizar",
+				command = lambda: self.scenario.set_params(self.simulation, self.entries)
+			).pack(side = 'bottom', pady = 16)
 
 		self.create_window(
 			self.width - self.param_frame['width']/2 - 10,
@@ -144,6 +172,8 @@ class MyCanvas(Canvas):
 		self.scenario.pause()
 
 	def wrapper_run(self):
-		self.run_text.set('Pausa')
-		self.run_button['command'] = self.wrapper_pause
-		self.scenario.run()
+		if self.scenario.validate_params():
+			self.validation_error_destroy()
+			self.run_text.set('Pausa')
+			self.run_button['command'] = self.wrapper_pause
+			self.scenario.run()

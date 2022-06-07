@@ -3,6 +3,7 @@ class Scenario:
 		self.canvas = canvas
 		self.simulation = simulation
 		self.params = params
+		self.have_buttons = True
 
 	def validate_params(self):
 		for param in self.simulation.get("params", []):
@@ -17,8 +18,12 @@ class Scenario:
 				except:
 					return False
 					
-				if not current_value_float in list(range(limits[0], limits[1] + 1)):
+				if current_value_float < limits[0] or current_value_float > limits[1]:
 					return False
 				
 
 		return True
+
+	def set_params(self, simulation, params):
+		self.simulation = simulation
+		self.params = params

@@ -11,7 +11,7 @@ class MenuFrame(MyFrame):
 		super().__init__(parent, **args)
 		self.parent = parent
 		self.simulations = simulations
-		self.initial_configuration((0, 1), (0,1,2))
+		self.initial_configuration((0, 1, 2), (0,1,2))
 		self.display()
 
 	def display(self):
@@ -71,7 +71,7 @@ class MenuFrame(MyFrame):
 		self.title.grid(
 			column = 0,
 			row = 0,
-			columnspan = 2,
+			columnspan = 3,
 			padx = 50,
 			pady = padding
 		)
@@ -79,8 +79,8 @@ class MenuFrame(MyFrame):
 		## Simulation Frames
 		for index, simulation in enumerate(self.simulation_frames):
 			simulation.grid(
-				column = index % 2,
-				row = index // 2 + 1,
+				column = index,
+				row = 1,
 				padx = padding,
 				pady = padding,
 				sticky = "NSEW",
