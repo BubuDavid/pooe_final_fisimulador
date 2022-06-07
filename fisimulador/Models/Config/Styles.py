@@ -31,3 +31,8 @@ class Styles(Style):
 			font = "Helvetica 20",
 			background = "#F0D9FF"
 		)
+
+		self.configure(
+			'Error.TLabel',
+			foreground = 'red'
+		)

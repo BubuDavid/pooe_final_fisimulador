@@ -3,7 +3,7 @@ from tkinter import ttk
 
 from .MyFrame import MyFrame
 
-from ..Config.MyImage import MyImage
+from ..Components.MyImage import MyImage
 from .Simulation import Simulation
 
 class MenuFrame(MyFrame):
@@ -109,24 +109,18 @@ class MenuFrame(MyFrame):
 		if "frame" in widget.winfo_name():
 			index = widget.winfo_name()[-1]
 			if index == 'e':
-				simulation_name = self.simulations[0]['name']
-				simulation_display_name = self.simulations[0]['display_name']
+				current_simulation = self.simulations[0]
 			else:
-				simulation_name = self.simulations[int(index) - 1]['name']
-				simulation_display_name = self.simulations[int(index) - 1]['display_name']
+				current_simulation = self.simulations[int(index) - 1]
 		else: 
 			for simulation in self.simulations:
 				if simulation['display_name'] == widget['text']:
-					simulation_name = simulation['name']
-					simulation_display_name = simulation['display_name']
+					current_simulation = simulation
 					break
 
 		self.parent.switch_frames(
 			Simulation,
-			simulation_names = {
-				'name': simulation_name,
-				'display_name': simulation_display_name
-			},
+			simulation = current_simulation,
 			borderwidth = 1,
 			relief = 'raised',
 			padding = 16

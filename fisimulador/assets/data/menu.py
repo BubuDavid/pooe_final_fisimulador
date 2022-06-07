@@ -8,8 +8,12 @@ simulations = [
 		"display_name": "Caída Libre",
 	},
 	{
-		"name": "simple_gas",
-		"display_name": "Gas Simple",
+		"name": "n-body",
+		"display_name": "Simulación de N cuerpos",
+		"params": [
+			{'name': 'Número de cuerpos', 'limits': [2, 100], 'default': '2'},
+			{'name': 'Intensidad de Gravedad', 'limits': [1, 100], 'default':"1.0"}
+		]
 	},
 	{
 		"name": "launch",

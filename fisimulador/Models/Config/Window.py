@@ -12,13 +12,7 @@ class Window(Tk):
 		self._frame = None
 
 		self.initial_configuration()
-		self.switch_frames(
-			MenuFrame,
-			simulations = simulations,
-			borderwidth = 1,
-			relief = 'raised',
-			padding = 16
-		)
+		self.switch_to_menu()
 		Styles()
 
 	def initial_configuration(self):
@@ -48,3 +42,12 @@ class Window(Tk):
 
 		new_frame = frame(self, **args)
 		self._frame = new_frame
+
+	def switch_to_menu(self):
+		self.switch_frames(
+			MenuFrame,
+			simulations = simulations,
+			borderwidth = 1,
+			relief = 'raised',
+			padding = 16
+		)
