@@ -80,6 +80,7 @@ class NBody(Scenario):
 
 	def update(self):
 		# Here I have to update the velocities
+		# LeapFrog
 		pos, vel, mass = get_vectors(self.bodies)
 		vel += self.acc * self.dt / 2.0
 		pos += vel * self.dt

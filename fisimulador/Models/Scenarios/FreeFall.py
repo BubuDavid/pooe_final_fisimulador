@@ -34,8 +34,6 @@ class FreeFall(Scenario):
 			y = event.y,
 			vx = 0,
 			vy = 0,
-			r = 10,
-			m = 1
 		)
 		temp_body.show()
 		self.bodies.append(temp_body)

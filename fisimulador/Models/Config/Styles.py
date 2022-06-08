@@ -1,12 +1,11 @@
 from tkinter import *
-from tkinter.ttk import  Style
+from tkinter.ttk import Style
 
 class Styles(Style):
 	def __init__(self):
 		super().__init__()
 		self.frame()
 		self.label()
-	
 	
 	def frame(self):
 		# Styles for Frames

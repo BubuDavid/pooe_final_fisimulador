@@ -145,7 +145,3 @@ class Collisions(Scenario):
 		self.digits = int(self.params['Número de dígitos'].get())
 
 		self.display_blocks()
-
-	
-	def display_scenario(self):
-		pass
